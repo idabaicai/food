@@ -1,19 +1,18 @@
 <template>
   <div>
-    <i class="iconfont icon-move"></i>
-    <div class="w">
-      hello vue2
-    </div>
+    <Header />
+    <Footer />
   </div>
 </template>
 <script>
-import request from './utils/request'
-console.log(request)
+import Header from './components/common/Header'
+import Footer from './components/common/Footer'
 export default {
+  components: {
+    Header,
+    Footer
+  },
   created () {
-    request.post('/api/login').then(res => {
-      console.log(res)
-    })
   }
 }
 </script>
