@@ -1,5 +1,9 @@
 <template>
   <div>
+    <i class="iconfont icon-move"></i>
+    <div class="w">
+      hello vue2
+    </div>
   </div>
 </template>
 <script>
