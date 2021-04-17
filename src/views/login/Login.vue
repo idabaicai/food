@@ -37,6 +37,7 @@
 import site from '../../config/site'
 import Header from '../../components/common/Header'
 import Footer from '../../components/common/Footer'
+
 export default {
   components: {
     Header,
@@ -51,10 +52,11 @@ export default {
   },
   methods: {
     handleLogin () {
+      localStorage.setItem('isLogin', true)
+      this.$router.push({ name: 'Home' })
     }
   },
   created () {
-    console.log('createds')
   }
 }
 </script>
