@@ -40,7 +40,6 @@ export default {
      * 登录
      */
     login () {
-      console.log(this.$route)
       if (this.$route.name !== 'Login') {
         this.$router.push('/login')
       }
