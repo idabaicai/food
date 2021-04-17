@@ -1,12 +1,15 @@
 <template>
   <div>
-    <el-button>app</el-button>
   </div>
 </template>
 <script>
+import request from './utils/request'
+console.log(request)
 export default {
   created () {
-    this.$message.success('se')
+    request.post('/api/login').then(res => {
+      console.log(res)
+    })
   }
 }
 </script>
