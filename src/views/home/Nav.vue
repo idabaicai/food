@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <el-card class="card">
+    <div class="card">
       <div class="w">
         <div class="logo">
           <img :src="logo_img" alt="">
@@ -17,7 +17,7 @@
           ></el-button>
         </el-input>
       </div>
-    </el-card>
+    </div>
   </div>
 </template>
 <script>
@@ -44,6 +44,7 @@ export default {
     .card {
       position: relative;
       height: 160px;
+      background-color: #fff;
       border-radius: 0;
       box-shadow: 0 2px 27px rgba(0, 0, 0, .10);
       .logo {
