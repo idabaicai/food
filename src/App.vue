@@ -1,17 +1,9 @@
 <template>
-  <div>
-    <Header />
-    <Footer />
-  </div>
+  <router-view></router-view>
 </template>
 <script>
-import Header from './components/common/Header'
-import Footer from './components/common/Footer'
+
 export default {
-  components: {
-    Header,
-    Footer
-  },
   created () {
   }
 }
