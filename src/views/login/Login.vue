@@ -53,6 +53,7 @@ export default {
   methods: {
     handleLogin () {
       localStorage.setItem('isLogin', true)
+      this.$message.success('登录成功')
       this.$router.push({ name: 'Home' })
     }
   },
