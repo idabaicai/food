@@ -3,7 +3,9 @@
     <div class="card">
       <div class="w">
         <div class="logo">
-          <img :src="logo_img" alt="">
+          <a href="#">
+            <img :src="logo_img" alt="">
+          </a>
         </div>
         <el-input
           placeholder="请输入商家或地点"

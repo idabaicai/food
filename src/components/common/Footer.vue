@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer w">
     <el-divider></el-divider>
     <el-row :gutter="8" class="info">
       <el-col :span="6">关于{{ site.name }}</el-col>

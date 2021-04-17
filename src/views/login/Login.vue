@@ -29,8 +29,8 @@
           >登录</el-button>
         </div>
       </main>
-      <Footer />
     </div>
+    <Footer />
   </div>
 </template>
 <script>
@@ -65,8 +65,8 @@ export default {
 @import url('../../style/variables.less');
   .login {
     width: 900px;
-    height: 100vh;
     margin: 0 auto;
+    background-color: #fff;
     .header {
       display: flex;
       justify-content: flex-start;
@@ -83,7 +83,6 @@ export default {
       justify-content: space-between;
       align-items: center;
       height: 380px;
-      margin-bottom: 50px;
       .right {
         display: flex;
         flex-direction: column;
