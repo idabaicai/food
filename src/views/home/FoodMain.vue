@@ -135,7 +135,7 @@ export default {
         direction: 'horizontal',
         loop: true,
         autoplay: {
-          delay: 2000
+          delay: 3000
         }
       })
       console.log(swiper)
