@@ -2,32 +2,32 @@
   <div>
       <Header />
       <div class="login">
-      <header class="header regular-text">
-        <img src="../../assets/logo.png" alt="">
-        <h2>欢迎登录{{ site.name }}</h2>
-      </header>
-      <main class="main">
-        <div class="left">
-          <img src="../../assets/login/side.jpg" alt="">
-        </div>
-        <div class="right">
-          <el-input
-            prefix-icon="el-icon-user"
-            v-model="name"
-            placeholder="请输入用户名"
-          ></el-input>
-          <el-input
-            prefix-icon="el-icon-unlock"
-            v-model="password"
-            show-password
-            type="password"
-            placeholder="密码"
-          ></el-input>
-          <el-button
-            type="primary"
-            @click="handleLogin"
-          >登录</el-button>
-        </div>
+        <header class="header regular-text">
+          <img src="../../assets/logo.png" alt="">
+          <h2>欢迎登录{{ site.name }}</h2>
+        </header>
+        <main class="main">
+          <div class="left">
+            <img src="../../assets/login/side.jpg" alt="">
+          </div>
+          <div class="right">
+            <el-input
+              prefix-icon="el-icon-user"
+              v-model="name"
+              placeholder="请输入用户名"
+            ></el-input>
+            <el-input
+              prefix-icon="el-icon-unlock"
+              v-model="password"
+              show-password
+              type="password"
+              placeholder="密码"
+            ></el-input>
+            <el-button
+              type="primary"
+              @click="handleLogin"
+            >登录</el-button>
+          </div>
       </main>
     </div>
     <Footer />
@@ -64,8 +64,8 @@ export default {
 <style lang="less" scoped>
 @import url('../../style/variables.less');
   .login {
-    width: 900px;
-    margin: 0 auto;
+    width: 100%;
+    padding: 0 180px;
     background-color: #fff;
     .header {
       display: flex;
