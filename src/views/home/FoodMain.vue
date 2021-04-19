@@ -19,9 +19,13 @@
         <div class="center-top">
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">1</div>
-              <div class="swiper-slide">2</div>
-              <div class="swiper-slide">3</div>
+              <div
+                class="swiper-slide"
+                v-for="item in swipeList"
+                :key="item.id"
+              >
+              <img :src="item.img_path" alt="">
+              </div>
             </div>
           </div>
         </div>
@@ -66,6 +70,12 @@ export default {
         { id: 1011, name: '美食' },
         { id: 1012, name: '美食' },
         { id: 1013, name: '美食' }
+      ],
+      // 轮播图
+      swipeList: [
+        { id: 101, img_path: require('../../assets/slides/item1.png') },
+        { id: 102, img_path: require('../../assets/slides/item2.jpg') },
+        { id: 103, img_path: require('../../assets/slides/item3.jpg') }
       ]
     }
   },
@@ -131,6 +141,7 @@ export default {
     }
     .center {
       // background-color: purple;
+      width: 690px;
       .center-top {
         width: 100%;
         height: 290px;
@@ -145,6 +156,11 @@ export default {
         .swiper-slide {
           font-size: 5rem;
           text-align: center;
+          img {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+          }
         }
       }
       .center-bottom {
@@ -159,7 +175,7 @@ export default {
         width: 100%;
         height: 290px;
         margin-bottom: 10px;
-        background-color: pink;
+        background-color: #fff;
       }
       .right-bottom {
         height: 127px;
