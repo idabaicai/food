@@ -25,7 +25,7 @@
 <script>
 import site from '../../config/site'
 export default {
-  name: 'Nav',
+  name: 'Nav', // 顶部导航
   data () {
     return {
       logo_img: require('../../assets/logo.png'),

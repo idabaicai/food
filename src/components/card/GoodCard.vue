@@ -1,5 +1,5 @@
 <template>
-  <div class="good-container">
+  <div class="good-container" @click="getDetail(good.id)">
     <div class="img-wrap">
       <img :src="good.img_path" alt="">
     </div>
@@ -34,7 +34,12 @@ export default {
       }
     }
   },
-  name: 'GoodCard'
+  name: 'GoodCard',
+  methods: {
+    getDetail (id) {
+      this.$router.push({ path: `/detail/${id}` })
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

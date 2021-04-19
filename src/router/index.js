@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/Home'
 import Login from '../views/login/Login'
+import Detail from '../views/detail/Detail'
 
 Vue.use(VueRouter)
 
@@ -12,7 +13,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/login',
+    path: '/login', // 登录页
     name: 'Login',
     component: Login,
     beforeEnter (to, from, next) {
@@ -22,6 +23,11 @@ const routes = [
         next()
       }
     }
+  },
+  {
+    path: '/detail/:id', // 详情页
+    component: Detail,
+    props: true
   }
 ]
 
