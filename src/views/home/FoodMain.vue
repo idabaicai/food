@@ -15,6 +15,7 @@
           </li>
         </ul>
       </el-col>
+      <!-- 轮播图 start -->
       <el-col :span="14" class="wrap center">
         <div class="center-top">
           <div class="swiper-container">
@@ -29,14 +30,22 @@
             </div>
           </div>
         </div>
+        <!-- 耳机轮播 -->
         <div class="center-bottom">
-          <el-row :gutter="24">
-            <el-col :span="8" class="item">item1</el-col>
-            <el-col :span="8" class="item">item2</el-col>
-            <el-col :span="8" class="item">item3</el-col>
-          </el-row>
+          <div>
+            <el-col
+              :span="8"
+              class="item"
+              v-for="item in subSwipeList"
+              :key="item.id"
+            >
+              <img :src="item.img_path" alt="">
+            </el-col>
+          </div>
         </div>
       </el-col>
+      <!-- 轮播图 end -->
+      <!-- 个人中心 start -->
       <el-col :span="5" class="wrap right">
         <div class="right-top">
           <div class="avatar">
@@ -77,6 +86,7 @@
           </div>
         </div>
       </el-col>
+      <!-- 个人中心 end -->
     </el-row>
   </div>
 </template>
@@ -110,6 +120,12 @@ export default {
         { id: 101, img_path: require('../../assets/slides/item1.png') },
         { id: 102, img_path: require('../../assets/slides/item2.jpg') },
         { id: 103, img_path: require('../../assets/slides/item3.jpg') }
+      ],
+      // 二级轮播
+      subSwipeList: [
+        { id: 10, img_path: require('../../assets/slides/sub-item1.png') },
+        { id: 11, img_path: require('../../assets/slides/sub-item2.jpg') },
+        { id: 12, img_path: require('../../assets/slides/sub-item3.jpg') }
       ]
     }
   },
@@ -199,9 +215,25 @@ export default {
         }
       }
       .center-bottom {
-        width: 100%;
+        width: 690px;
         height: 127px;
-        background-color: pink;
+        .el-row {
+          // width: 690px;
+          margin: 0;
+          padding: 0;
+        }
+        .item {
+          width: 226px;
+          height: 127px;
+          background-color: pink;
+          &:nth-child(2) {
+            margin: 0 6px;
+          }
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
     }
     .right {
