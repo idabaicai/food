@@ -39,9 +39,43 @@
       </el-col>
       <el-col :span="5" class="wrap right">
         <div class="right-top">
-          个人中心
+          <div class="avatar">
+            <el-avatar
+              :size="60"
+              src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+            ></el-avatar>
+          </div>
+          <div class="mine-box">
+            <el-row>
+              <el-col :span="8">
+                <span class="iconfont icon-xinzengtubiao-19"></span>
+                <a class="item info-text">我的订单</a>
+              </el-col>
+              <el-col :span="8">
+                <span class="iconfont icon-coupon"></span>
+                <a class="item info-text">优惠券</a>
+              </el-col>
+              <el-col :span="8">
+                <span class="iconfont icon-shoucang1"></span>
+                <a class="item info-text">收藏</a>
+              </el-col>
+              <!-- <el-col :span="8">
+                <span class="iconfont icon-iconfontdizhi"></span>
+                <a class="item info-text">收获地址</a>
+              </el-col>
+              <el-col :span="8">
+                <span class="iconfont icon-iconfontdizhi"></span>
+                <a class="item info-text">收获地址</a>
+              </el-col> -->
+            </el-row>
+          </div>
         </div>
-        <div class="right-bottom"></div>
+        <div class="right-bottom">
+          <img src="../../assets/mini-app.png" alt="">
+          <div class="qr-code">
+            <span class="info-text">扫一扫, 马上订</span>
+          </div>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -142,6 +176,7 @@ export default {
     .center {
       // background-color: purple;
       width: 690px;
+      margin: 0 5px;
       .center-top {
         width: 100%;
         height: 290px;
@@ -170,16 +205,57 @@ export default {
       }
     }
     .right {
-      background-color: hotpink;
       .right-top {
         width: 100%;
         height: 290px;
         margin-bottom: 10px;
+        padding: 0 20px;
+        border: 1px solid #ddd;
         background-color: #fff;
+        .avatar {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 120px;
+        }
+        .mine-box {
+          .el-row {
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
+              height: 50px;
+            .el-col {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              align-items: center;
+              width: 60px;
+              height: 46px;
+              margin: 8px 5px;
+              cursor: pointer;
+              .iconfont {
+                font-size: 40px;
+                color: rgb(240, 150, 40);
+              }
+              .item {
+                display: block;
+              }
+            }
+          }
+        }
       }
       .right-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         height: 127px;
-        background-color: pink;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        img {
+          width: 100px;
+          height: 100px;
+        }
       }
     }
   }
