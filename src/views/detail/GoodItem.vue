@@ -37,6 +37,7 @@
           <price :show-start="false" :price="total"></price>
         </div>
         <div class="btn">
+          <el-button type="success" @click="handleCart">加入购物车</el-button>
           <el-button type="primary" @click="handleSubmit">提交订单</el-button>
         </div>
       </div>
@@ -79,12 +80,17 @@ export default {
     handlePlus () {
       this.number++
     },
+    // 提交订单
     handleSubmit () {
       if (this.number > 0) {
         this.$message.success('提交成功！')
       } else {
         this.$message.error('数量不能小于1哦')
       }
+    },
+    // 加入购物车
+    handleCart () {
+      console.log('add cart')
     }
   },
   computed: {
