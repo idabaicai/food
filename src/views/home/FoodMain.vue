@@ -10,7 +10,7 @@
             v-for="item in cateLists"
             :key="item.id"
           >
-            <a href=""> {{ item.name }}</a>
+            <a href="#" @click.prevent="handleCateClick(item.category)"> {{ item.name }}</a>
             <i class="el-icon-arrow-right"></i>
           </li>
         </ul>
@@ -95,19 +95,19 @@ export default {
     return {
       // 右侧分类数据
       cateLists: [
-        { id: 1001, name: '美食' },
-        { id: 1002, name: '美食' },
-        { id: 1003, name: '美食' },
-        { id: 1004, name: '美食' },
-        { id: 1005, name: '美食' },
-        { id: 1006, name: '美食' },
-        { id: 1007, name: '美食' },
-        { id: 1008, name: '美食' },
-        { id: 1009, name: '美食' },
-        { id: 1010, name: '美食' },
-        { id: 1011, name: '美食' },
-        { id: 1012, name: '美食' },
-        { id: 1013, name: '美食' }
+        { id: 1001, name: '美食', category: 'fine' },
+        { id: 1002, name: '好评', category: 'moreStar' },
+        { id: 1003, name: '距离最近', category: 'near' },
+        { id: 1004, name: '美食', category: 'fine' },
+        { id: 1005, name: '美食', category: 'fine' },
+        { id: 1006, name: '美食', category: 'fine' },
+        { id: 1007, name: '美食', category: 'fine' },
+        { id: 1008, name: '美食', category: 'fine' },
+        { id: 1009, name: '美食', category: 'fine' },
+        { id: 1010, name: '美食', category: 'fine' },
+        { id: 1011, name: '美食', category: 'fine' },
+        { id: 1012, name: '美食', category: 'fine' },
+        { id: 1013, name: '美食', category: 'fine' }
       ],
       // 轮播图
       swipeList: [
@@ -139,6 +139,11 @@ export default {
     // 去个人中心
     handleMyOrder () {
       this.$router.push({ path: `user/${localStorage.getItem('uid')}` })
+    },
+    // 商品列表
+    handleCateClick (categoryName) {
+      console.log(categoryName)
+      this.$router.push({ path: `list/${categoryName}` })
     }
   },
   computed: {

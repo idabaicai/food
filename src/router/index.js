@@ -4,6 +4,7 @@ import Home from '../views/home/Home'
 import Login from '../views/login/Login'
 import Detail from '../views/detail/Detail'
 import User from '../views/user/User'
+import List from '../views/good_list/List'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,12 @@ const routes = [
     path: '/user/:id', // 个人中心页
     name: 'User',
     component: User,
+    props: true
+  },
+  {
+    path: '/list/:cateName', // 商品列表
+    name: 'List',
+    component: List,
     props: true
   }
 ]
