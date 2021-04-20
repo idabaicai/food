@@ -2,10 +2,8 @@
   <div class="nav">
     <div class="card">
       <div class="w">
-        <div class="logo">
-          <a href="#">
+        <div class="logo" @click="handleIndex">
             <img :src="logo_img" alt="">
-          </a>
         </div>
         <el-input
           placeholder="请输入商家或地点"
@@ -36,6 +34,11 @@ export default {
   methods: {
     handleSearch () {
       console.log('search')
+    },
+    handleIndex () { // 去首页
+      if (this.$route.name !== 'Home') {
+        this.$router.push({ path: '/' })
+      }
     }
   }
 }
@@ -53,6 +56,7 @@ export default {
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        cursor: pointer;
         h2 {
           vertical-align: middle;
         }

@@ -3,7 +3,7 @@
       <Header />
       <div class="login-wrap">
         <header class="header regular-text">
-          <img src="../../assets/logo.png" alt="">
+          <img src="../../assets/logo.png" alt="" @click="handleIndex">
           <h2>欢迎登录{{ site.name }}</h2>
         </header>
         <main class="main">
@@ -90,6 +90,7 @@ export default {
   methods: {
     handleLogin () {
       localStorage.setItem('isLogin', true)
+      localStorage.setItem('uid', '2021001')
       this.$message.success('登录成功')
       this.$router.push({ name: 'Home' })
     },
@@ -98,6 +99,9 @@ export default {
     },
     handleRegister () {
       console.log('register')
+    },
+    handleIndex () { // 去首页
+      this.$router.push({ path: '/' })
     }
   },
   created () {
@@ -119,6 +123,7 @@ export default {
       img {
         width: 100px;
         height: 100px;
+        cursor: pointer;
       }
     }
     .main {

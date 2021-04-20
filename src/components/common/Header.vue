@@ -13,7 +13,7 @@
         </el-col>
         <el-col :span="12">
           <div class="right">
-            <a href="#">我的</a>
+            <a href="#" @click.prevent="handleUserCenter">我的</a>
             <a href="#" v-if="isLogin" @click.prevent="logout">注销</a>
             <a href="#" v-else @click.prevent="login">登录</a>
             <a href="#">小程序</a>
@@ -49,7 +49,22 @@ export default {
      */
     logout () {
       localStorage.removeItem('isLogin')
+      localStorage.removeItem('uid')
       this.isLogin = false
+      // 去首页
+      this.$router.push({ path: '/' })
+    },
+    /**
+     * 去个人中心
+     */
+    handleUserCenter () {
+      const id = localStorage.getItem('uid')
+      const isLogin = localStorage.getItem('isLogin')
+      if (isLogin) {
+        this.$router.push({ path: `/user/${id}` })
+      } else if (this.$route.name !== 'Login') {
+        this.$router.push({ path: '/login' })
+      }
     }
   },
   created () {
