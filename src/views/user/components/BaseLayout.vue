@@ -1,25 +1,74 @@
 <template>
   <div class="container w">
-    <el-container>
-      <el-aside>Aside</el-aside>
-      <el-main>Main</el-main>
-    </el-container>
+    <div class="aside">
+      <ul>
+        <li v-for="item in menuList" :key="item.id">
+          <a href="#" @click.prevent="handleChange(item.component)">{{ item.name }}</a>
+          <i class="el-icon-arrow-right"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="main">
+      <component :is="activeComponent" />
+    </div>
   </div>
 </template>
 <script>
+import Order from './order/Order'
+import Collect from './Collect'
 export default {
-  name: 'BaseLayout'
+  name: 'BaseLayout',
+  components: {
+    Order,
+    Collect
+  },
+  data () {
+    return {
+      menuList: [
+        { id: 1, name: '我的订单', path: 'order', component: 'Order' },
+        { id: 2, name: '我的收藏', path: 'collect', component: 'Collect' },
+        { id: 3, name: '全部订单', path: 'order', component: 'order' },
+        { id: 4, name: '待付款', path: 'order', component: 'order' },
+        { id: 5, name: '个人信息', path: 'order', component: 'order' }
+      ],
+      activeComponent: Order // 当前组件
+    }
+  },
+  methods: {
+    handleChange (component) {
+      this.activeComponent = component
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
   .container {
+    display: flex;
     height: 800px;
     margin-top: 20px;
-    background-color: pink;
-    .el-aside {
-      widows: 240px;
-      height: 800px;
-      background-color: purple;
+    margin-bottom: 30px;
+    .aside {
+      width: 220px;
+      padding: 28px 20px;
+      margin-right: 12px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      li {
+        height: 36px;
+        display: flex;
+        justify-content: space-between;
+      }
+      a, i{
+        color: #C0C4CC;
+        font-size: 16px;
+      }
+    }
+    .main {
+      background-color: #fff;
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 4px;
     }
   }
 </style>
