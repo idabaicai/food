@@ -57,8 +57,10 @@
           <div class="mine-box">
             <el-row>
               <el-col :span="8">
-                <span class="iconfont icon-xinzengtubiao-19"></span>
-                <a class="item info-text">我的订单</a>
+                <div @click="handleMyOrder">
+                  <span class="iconfont icon-xinzengtubiao-19"></span>
+                  <a class="item info-text" href="#">我的订单</a>
+                </div>
               </el-col>
               <el-col :span="8">
                 <span class="iconfont icon-coupon"></span>
@@ -68,14 +70,6 @@
                 <span class="iconfont icon-shoucang1"></span>
                 <a class="item info-text">收藏</a>
               </el-col>
-              <!-- <el-col :span="8">
-                <span class="iconfont icon-iconfontdizhi"></span>
-                <a class="item info-text">收获地址</a>
-              </el-col>
-              <el-col :span="8">
-                <span class="iconfont icon-iconfontdizhi"></span>
-                <a class="item info-text">收获地址</a>
-              </el-col> -->
             </el-row>
           </div>
         </div>
@@ -138,7 +132,13 @@ export default {
           delay: 3000
         }
       })
-      console.log(swiper)
+      if (!swiper) {
+        console.log('swiper init error')
+      }
+    },
+    // 去个人中心
+    handleMyOrder () {
+      this.$router.push({ path: `user/${localStorage.getItem('uid')}` })
     }
   },
   computed: {
