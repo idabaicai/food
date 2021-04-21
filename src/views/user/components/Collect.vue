@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="wrap">
     <div class="item">
-      <el-row v-for="item in itemList" :key="item.id">
+      <el-row v-for="(item, index) in itemList" :key="item.id" type="flex" align="middle">
         <el-col :span="3">
           <img :src="item.img_path" :alt="item.name">
         </el-col>
@@ -13,9 +13,23 @@
           ￥{{ item.price }}
         </el-col>
         <el-col :span="6">
-          <calculator :num="item.number" @numChange="handleNumChange"></calculator>
+          <calculator :num="item.number" :idx="index" @numChange="handleNumChange"></calculator>
+        </el-col>
+        <el-col :span="2">
+           ￥{{ item.number * item.price }}
+        </el-col>
+        <el-col :span="2" class="delete">
+          <i class="el-icon-delete" @click="handleDelete(index)"></i>
         </el-col>
       </el-row>
+    </div>
+    <div class="deal">
+      <div class="total">
+      <span class="info-text">总金额：</span> <span class="total">￥{{ totalPrice }}</span>
+      </div>
+      <div class="submit">
+        <el-button @click="handleSubmit" type="primary">提交订单</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -29,20 +43,44 @@ export default {
   data () {
     return {
       itemList: [
-        { id: 1, name: '孜然鸡柳+百事可乐', star: 4.7, img_path: require('../../../assets/list/item1.jpg'), price: 29.9, number: 1 },
-        { id: 2, name: '美滋客汉堡', star: 4.8, img_path: require('../../../assets/list/item2.jpg'), price: 39.9, number: 3 }
+        { id: 1, name: '孜然鸡柳+百事可乐', star: 4.7, img_path: require('../../../assets/list/item1.jpg'), price: 29, number: 1 },
+        { id: 2, name: '美滋客汉堡', star: 4.8, img_path: require('../../../assets/list/item2.jpg'), price: 39, number: 3 }
       ]
     }
   },
   methods: {
-    handleNumChange (num) {
-      console.log(num)
+    // 子组件改变数量
+    handleNumChange (num, idx) {
+      this.itemList[idx].number = num
+    },
+    // 提交订单
+    handleSubmit () {
+      console.log('submit')
+    },
+    // 删除 item
+    handleDelete (idx) {
+      this.$confirm('确认删除吗', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.itemList.splice(idx, 1)
+      })
+    }
+  },
+  computed: {
+    totalPrice () {
+      let total = 0
+      this.itemList.forEach(item => {
+        total += item.number * item.price
+      })
+      return total
     }
   }
 }
 </script>
 <style lang="less" scoped>
-  .container {
+  .wrap {
     padding: 15px;
     .item {
       width: 100%;
@@ -59,6 +97,21 @@ export default {
       .title {
         color: #303133;
       }
+      .delete {
+        cursor: pointer;
+      }
     }
+    .deal {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+        .total {
+          color: #f60;
+          font-size: 24px;
+        }
+        .submit {
+          margin-top: 4px;
+        }
+      }
   }
 </style>

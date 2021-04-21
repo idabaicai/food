@@ -52,9 +52,10 @@ export default {
 <style lang="less" scoped>
   .container {
     display: flex;
-    height: 800px;
     margin-top: 20px;
     margin-bottom: 30px;
+    padding-bottom: 30px;
+    height: 600px;
     .aside {
       width: 220px;
       padding: 28px 20px;
