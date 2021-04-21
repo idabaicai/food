@@ -31,7 +31,7 @@ export default {
     return {
       menuList: [
         { id: 1, name: '我的订单', path: 'order', component: 'Order' },
-        { id: 2, name: '我的收藏', path: 'collect', component: 'Collect' },
+        { id: 2, name: '购物车', path: 'collect', component: 'Collect' },
         { id: 3, name: '全部订单', path: 'order', component: 'order' },
         { id: 4, name: '待付款', path: 'order', component: 'order' },
         { id: 5, name: '个人信息', path: 'order', component: 'order' }

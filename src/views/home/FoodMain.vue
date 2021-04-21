@@ -65,7 +65,7 @@
               <div @click="handleCollect">
                 <el-col :span="8">
                   <span class="iconfont icon-shoucang1"></span>
-                  <a class="item info-text">收藏</a>
+                  <a class="item info-text">购物车</a>
                 </el-col>
               </div>
               <el-col :span="8">
