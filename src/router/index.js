@@ -32,7 +32,7 @@ const routes = [
     props: true
   },
   {
-    path: '/user/:id', // 个人中心页
+    path: '/user/:id/:component', // 个人中心页
     name: 'User',
     component: User,
     props: true

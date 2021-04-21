@@ -18,6 +18,11 @@ import Order from './order/Order'
 import Collect from './Collect'
 export default {
   name: 'BaseLayout',
+  props: {
+    component: { // 当前组件，可以时父组件传递下来的
+      type: String
+    }
+  },
   components: {
     Order,
     Collect
@@ -38,6 +43,9 @@ export default {
     handleChange (component) {
       this.activeComponent = component
     }
+  },
+  created () {
+    this.activeComponent = this.component
   }
 }
 </script>

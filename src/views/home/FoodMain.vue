@@ -62,13 +62,15 @@
                   <a class="item info-text" href="#">我的订单</a>
                 </div>
               </el-col>
+              <div @click="handleCollect">
+                <el-col :span="8">
+                  <span class="iconfont icon-shoucang1"></span>
+                  <a class="item info-text">收藏</a>
+                </el-col>
+              </div>
               <el-col :span="8">
                 <span class="iconfont icon-coupon"></span>
                 <a class="item info-text">优惠券</a>
-              </el-col>
-              <el-col :span="8">
-                <span class="iconfont icon-shoucang1"></span>
-                <a class="item info-text">收藏</a>
               </el-col>
             </el-row>
           </div>
@@ -120,7 +122,8 @@ export default {
         { id: 10, img_path: require('../../assets/slides/sub-item1.png') },
         { id: 11, img_path: require('../../assets/slides/sub-item2.jpg') },
         { id: 12, img_path: require('../../assets/slides/sub-item3.jpg') }
-      ]
+      ],
+      userId: 1
     }
   },
   methods: {
@@ -138,7 +141,11 @@ export default {
     },
     // 去个人中心
     handleMyOrder () {
-      this.$router.push({ path: `user/${localStorage.getItem('uid')}` })
+      this.$router.push({ path: `user/${this.userId}/Order` })
+    },
+    // 去收藏页面
+    handleCollect () {
+      this.$router.push({ path: `user/${this.userId}/Collect` })
     },
     // 商品列表
     handleCateClick (categoryName) {
@@ -155,6 +162,8 @@ export default {
     this.$nextTick(() => {
       this.initSwiper()
     })
+    // 缓存当前用户id
+    this.userId = localStorage.getItem('uid')
   },
   mounted () {
   }

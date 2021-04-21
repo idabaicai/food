@@ -2,7 +2,7 @@
   <div class="container">
     <Header />
     <Nav />
-    <BaseLayout />
+    <BaseLayout :component="component"/>
     <Footer />
   </div>
 </template>
@@ -16,6 +16,12 @@ export default {
   props: {
     id: {
       type: String
+    },
+    component: {
+      type: String,
+      default () {
+        return 'Order'
+      }
     }
   },
   components: {

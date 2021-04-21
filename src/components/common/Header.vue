@@ -61,7 +61,7 @@ export default {
       const id = localStorage.getItem('uid')
       const isLogin = localStorage.getItem('isLogin')
       if (isLogin) {
-        this.$router.push({ path: `/user/${id}` })
+        this.$router.push({ path: `/user/${id}/Order` })
       } else if (this.$route.name !== 'Login') {
         this.$router.push({ path: '/login' })
       }
