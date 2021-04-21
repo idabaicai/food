@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="item">
-      <el-row v-for="item in itemList" :key="item.id">
+      <el-row v-for="(item, idx) in itemList" :key="item.id">
         <el-col :span="3">
           <img :src="item.img_path" :alt="item.name">
         </el-col>
@@ -9,13 +9,19 @@
           <div class="title"> {{ item.name }} </div>
           <el-rate v-model="item.star" disabled show-score text-color="#f90"></el-rate>
         </el-col>
-        <el-col :span="4" :offset="2">
+        <el-col :span="4">
           ￥{{ item.price }}
         </el-col>
         <el-col :span="6">
-          <calculator :num="item.number" @numChange="handleNumChange"></calculator>
+          <calculator :num="item.number" :idx="idx" @numChange="handleNumChange"></calculator>
+        </el-col>
+        <el-col :span="6">
+          ￥{{ item.price * item.number }}
         </el-col>
       </el-row>
+    </div>
+    <div class="total-wrap">
+      <div class="total-price"> 总价：124 </div>
     </div>
   </div>
 </template>
@@ -29,14 +35,14 @@ export default {
   data () {
     return {
       itemList: [
-        { id: 1, name: '孜然鸡柳+百事可乐', star: 4.7, img_path: require('../../../assets/list/item1.jpg'), price: 29.9, number: 1 },
-        { id: 2, name: '美滋客汉堡', star: 4.8, img_path: require('../../../assets/list/item2.jpg'), price: 39.9, number: 3 }
+        { id: 1, name: '孜然鸡柳+百事可乐', star: 4.7, img_path: require('../../../assets/list/item1.jpg'), price: 29, number: 1 },
+        { id: 2, name: '美滋客汉堡', star: 4.8, img_path: require('../../../assets/list/item2.jpg'), price: 39, number: 3 }
       ]
     }
   },
   methods: {
-    handleNumChange (num) {
-      console.log(num)
+    handleNumChange (num, idx) {
+      this.itemList[idx].number = num
     }
   }
 }
@@ -44,6 +50,7 @@ export default {
 <style lang="less" scoped>
   .container {
     padding: 15px;
+    display: block;
     .item {
       width: 100%;
       .el-row {
