@@ -10,11 +10,14 @@
 export default {
   name: 'Calculator',
   props: {
-    num: {
+    num: { // 数量
       type: Number,
       default () {
         return 1
       }
+    },
+    idx: { // 索引
+      type: Number
     }
   },
   data () {
@@ -26,12 +29,12 @@ export default {
     handleMinux () {
       if (this.num > 1) {
         this.number--
-        this.$emit('numChange', this.number)
+        this.$emit('numChange', this.number, this.idx)
       }
     },
     handlePlus () {
       this.number++
-      this.$emit('numChange', this.number)
+      this.$emit('numChange', this.number, this.idx)
     }
   },
   created () {
