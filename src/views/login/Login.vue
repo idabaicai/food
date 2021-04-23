@@ -4,7 +4,7 @@
       <div class="login-wrap">
         <header class="header regular-text">
           <img src="../../assets/logo.png" alt="" @click="handleIndex">
-          <h2>欢迎登录{{ site.name }}</h2>
+          <h2>欢迎登录{{ site.name }}!</h2>
         </header>
         <main class="main">
           <div class="left">
