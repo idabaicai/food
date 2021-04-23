@@ -16,6 +16,7 @@
 <script>
 import Order from './order/Order'
 import Collect from './Collect'
+import Info from './Info'
 export default {
   name: 'BaseLayout',
   props: {
@@ -25,7 +26,8 @@ export default {
   },
   components: {
     Order,
-    Collect
+    Collect,
+    Info
   },
   data () {
     return {
@@ -34,7 +36,7 @@ export default {
         { id: 2, name: '购物车', path: 'collect', component: 'Collect' },
         { id: 3, name: '全部订单', path: 'order', component: 'order' },
         { id: 4, name: '待付款', path: 'order', component: 'order' },
-        { id: 5, name: '个人信息', path: 'order', component: 'order' }
+        { id: 5, name: '个人信息', path: 'order', component: 'Info' }
       ],
       activeComponent: Order // 当前组件
     }
