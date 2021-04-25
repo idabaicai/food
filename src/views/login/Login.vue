@@ -131,17 +131,23 @@ export default {
       console.log(this.user)
       request.post('/user/register', this.user)
         .then(res => {
-          this.$message.success('注册成功')
-          this.isLogin = true
-          this.user = {
-            name: '', // 用户名
-            loginName: '',
-            gender: '',
-            age: '',
-            address: '',
-            phone: '', // 手机号
-            password: '', // 密码
-            repeatPassword: '' // 重复密码
+          console.log(res)
+          if (res.state === 1) {
+            this.$message.success(res.data.message)
+            this.isLogin = true
+            this.user = {
+              name: '', // 用户名
+              loginName: '',
+              gender: '',
+              age: '',
+              address: '',
+              phone: '', // 手机号
+              password: '', // 密码
+              repeatPassword: '' // 重复密码
+            }
+          } else {
+            // this.$message.error(res.message)
+            this.$message.error(res.data.message)
           }
         })
     },
