@@ -39,6 +39,21 @@
                   placeholder="请输入用户名"
                 ></el-input>
                 <el-input
+                  prefix-icon="el-icon-user"
+                  v-model="user.loginName"
+                  placeholder="请输入登录名"
+                ></el-input>
+                <el-input
+                  prefix-icon="el-icon-user"
+                  v-model="user.phone"
+                  placeholder="请输入电话号"
+                ></el-input>
+                <el-input
+                  prefix-icon="el-icon-user"
+                  v-model="user.age"
+                  placeholder="请输入年龄"
+                ></el-input>
+                <el-input
                   prefix-icon="el-icon-unlock"
                   v-model="user.password"
                   show-password
@@ -52,6 +67,15 @@
                   type="password"
                   placeholder="确认密码"
                 ></el-input>
+                <el-input
+                  prefix-icon="el-icon-user"
+                  v-model="user.address"
+                  placeholder="请输入地址"
+                ></el-input>
+                <el-select v-model="user.gender" style="width: 100%">
+                  <el-option label="男" value="男"></el-option>
+                  <el-option label="女" value="女"></el-option>
+                </el-select>
                 <el-button
                   type="primary"
                   @click="handleRegister"
@@ -70,6 +94,7 @@
 import site from '../../config/site'
 import Header from '../../components/common/Header'
 import Footer from '../../components/common/Footer'
+import request from '../../utils/request'
 
 export default {
   components: {
@@ -79,7 +104,12 @@ export default {
   data () {
     return {
       user: {
-        name: '123456', // 用户名
+        name: '', // 用户名
+        loginName: '',
+        gender: '',
+        age: '',
+        address: '',
+        phone: '', // 手机号
         password: '', // 密码
         repeatPassword: '' // 重复密码
       },
@@ -98,13 +128,33 @@ export default {
       this.isLogin = false
     },
     handleRegister () {
-      console.log('register')
+      console.log(this.user)
+      request.post('/user/register', this.user)
+        .then(res => {
+          this.$message.success('注册成功')
+          this.isLogin = true
+          this.user = {
+            name: '', // 用户名
+            loginName: '',
+            gender: '',
+            age: '',
+            address: '',
+            phone: '', // 手机号
+            password: '', // 密码
+            repeatPassword: '' // 重复密码
+          }
+        })
     },
     handleIndex () { // 去首页
       this.$router.push({ path: '/' })
     }
   },
   created () {
+    const userName = 'zs'
+    const password = 123456
+    request.get(`/user/login/?username=${userName}&password=${password}`).then(res => {
+      console.log(res)
+    })
   }
 }
 </script>
