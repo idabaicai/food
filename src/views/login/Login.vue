@@ -119,6 +119,7 @@ export default {
   },
   methods: {
     handleLogin () {
+      // 模拟登录
       request.get(`/user/login?username=${this.user.name}&password=${this.user.password}`)
         .then(res => {
           console.log(res)
@@ -140,8 +141,7 @@ export default {
       console.log(this.user)
       request.post('/user/register', this.user)
         .then(res => {
-          console.log(res)
-          if (res.state === 1) {
+          if (res.data.state === 1) {
             this.$message.success(res.data.message)
             this.isLogin = true
             this.user = {
@@ -155,7 +155,6 @@ export default {
               repeatPassword: '' // 重复密码
             }
           } else {
-            // this.$message.error(res.message)
             this.$message.error(res.data.message)
           }
         })

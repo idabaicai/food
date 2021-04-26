@@ -1,7 +1,7 @@
 <template>
   <div class="item-container w">
     <div class="left">
-      <img src="../../assets/detail/item1.jpg" alt="">
+      <img :src="item.image" :alt="item.name">
     </div>
     <div class="right">
       <div class="header">
@@ -62,12 +62,13 @@ export default {
   },
   data () {
     return {
+      img_path: require('../../assets/detail/item1.jpg'),
       item: {
-        id: '1001',
-        name: '不吃火锅，就吃烤匠！',
-        desc: '仅售89元！价值100元的代金券，除酒水饮料外全场通用，可叠加使用，可免费使用包间，提供免费WiFi',
-        price: 199,
-        number: 1
+        // id: '1001',
+        // name: '不吃火锅，就吃烤匠！',
+        // desc: '仅售89元！价值100元的代金券，除酒水饮料外全场通用，可叠加使用，可免费使用包间，提供免费WiFi',
+        // price: 199,
+        // number: 1
       },
       number: 1, // 数量,
       uid: ''
@@ -97,6 +98,13 @@ export default {
   },
   created () {
     this.uid = localStorage.getItem('uid')
+    // 获取详情
+    request.get(`/goods/findGoodsDetail?id=${this.id}`)
+      .then(res => {
+        console.log(res)
+        this.item = res.data.data.goods
+        console.log(this.item)
+      })
   },
   computed: {
     total () {

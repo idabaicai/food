@@ -42,21 +42,11 @@ export default {
   data () {
     return {
       img_path: require('../../../assets/list/item1.jpg'),
-      itemList: [
-      //   {
-      //     id: 10,
-      //     name: '蜜雪冰城（昌江店）',
-      //     img_path: require('../../../assets/list/item1.jpg'),
-      //     star: 4.8,
-      //     address: '亚细亚商业广场人民北路汽车站对面农工商公司主楼第一层楼梯间左侧第一间',
-      //     price: 8
-      //   },
-      ]
+      itemList: []
     }
   },
   methods: {
     handleDetail (id) {
-      console.log(id)
       this.$router.push({ path: `/detail/${id}` })
     }
   },
@@ -82,6 +72,7 @@ export default {
       img {
         width: 220px;
         height: 125px;
+        cursor: pointer;
         border-radius: 4px;
       }
       .info-container {
