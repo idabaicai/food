@@ -104,13 +104,13 @@ export default {
   data () {
     return {
       user: {
-        name: '', // 用户名
+        name: 'root', // 用户名
         loginName: '',
         gender: '',
         age: '',
         address: '',
         phone: '', // 手机号
-        password: '', // 密码
+        password: '123456', // 密码
         repeatPassword: '' // 重复密码
       },
       site,
@@ -119,10 +119,18 @@ export default {
   },
   methods: {
     handleLogin () {
-      localStorage.setItem('isLogin', true)
-      localStorage.setItem('uid', '2021001')
-      this.$message.success('登录成功')
-      this.$router.push({ name: 'Home' })
+      request.get(`/user/login?username=${this.user.name}&password=${this.user.password}`)
+        .then(res => {
+          console.log(res)
+          if (res.data.state === 1) {
+            localStorage.setItem('isLogin', true)
+            localStorage.setItem('uid', res.data.id)
+            this.$message.success('登录成功')
+            this.$router.push({ name: 'Home' })
+          } else {
+            this.$message.error(res.data.message)
+          }
+        })
     },
     register () {
       this.isLogin = false
@@ -156,11 +164,6 @@ export default {
     }
   },
   created () {
-    const userName = 'zs'
-    const password = 123456
-    request.get(`/user/login/?username=${userName}&password=${password}`).then(res => {
-      console.log(res)
-    })
   }
 }
 </script>
