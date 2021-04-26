@@ -1,7 +1,7 @@
 <template>
   <div class="item-container w">
     <div class="left">
-      <img :src="item.image" :alt="item.name">
+      <img :src="item.image || img_path" :alt="item.name">
     </div>
     <div class="right">
       <div class="header">
@@ -93,7 +93,24 @@ export default {
     },
     // 加入购物车
     handleCart () {
-      request.post('/Cart/addCart')
+      // {
+      //         "userId": 1,
+      //         "foodId": 10,
+      //         "num": 5
+      // }
+      const params = {
+        userId: this.uid,
+        foodId: this.item.id,
+        num: this.item.num
+      }
+      request.post('/Cart/addCart', params)
+        .then(res => {
+          if (res.data.state === 1) {
+            this.$message.success('添加成功!')
+          } else {
+            this.$message.error(res.data.data.message)
+          }
+        })
     }
   },
   created () {
@@ -101,9 +118,7 @@ export default {
     // 获取详情
     request.get(`/goods/findGoodsDetail?id=${this.id}`)
       .then(res => {
-        console.log(res)
         this.item = res.data.data.goods
-        console.log(this.item)
       })
   },
   computed: {
