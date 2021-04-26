@@ -5,7 +5,7 @@
         <div class="logo" @click="handleIndex">
             <img :src="logo_img" alt="">
         </div>
-        <el-input
+        <!-- <el-input
           placeholder="请输入商家或地点"
           v-model="query"
         >
@@ -15,7 +15,7 @@
             slot="append"
             @click="handleSearch"
           ></el-button>
-        </el-input>
+        </el-input> -->
       </div>
     </div>
   </div>
