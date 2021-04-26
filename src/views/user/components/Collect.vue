@@ -47,7 +47,8 @@ export default {
       itemList: [
         // { id: 1, name: '孜然鸡柳+百事可乐', star: 4.7, img_path: require('../../../assets/list/item1.jpg'), price: 29, number: 1 },
         // { id: 2, name: '美滋客汉堡', star: 4.8, img_path: require('../../../assets/list/item2.jpg'), price: 39, number: 3 }
-      ]
+      ],
+      uid: null
     }
   },
   methods: {
@@ -66,17 +67,21 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        // 删除购物车
+        request.get(`/Cart/reduceCart?userId=${this.uid}&goodsId=${this.itemList[idx].foodId}`)
         this.itemList.splice(idx, 1)
       })
     }
   },
   mounted () {
-    request.get(`/Cart/findList?userId=${localStorage.getItem('uid')}`)
+    request.get(`/Cart/findList?userId=${this.uid}`)
       .then(res => {
         this.itemList = res.data.data
         console.log(res.data.data)
       })
-    console.log(this.itemList)
+  },
+  created () {
+    this.uid = localStorage.getItem('uid')
   },
   computed: {
     totalPrice () {
