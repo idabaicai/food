@@ -104,13 +104,13 @@ export default {
   data () {
     return {
       user: {
-        name: 'root', // 用户名
+        name: '', // 用户名
         loginName: '',
         gender: '',
         age: '',
         address: '',
         phone: '', // 手机号
-        password: '123456', // 密码
+        password: '', // 密码
         repeatPassword: '' // 重复密码
       },
       site,
@@ -124,7 +124,7 @@ export default {
           console.log(res)
           if (res.data.state === 1) {
             localStorage.setItem('isLogin', true)
-            localStorage.setItem('uid', res.data.id)
+            localStorage.setItem('uid', res.data.data.id)
             this.$message.success('登录成功')
             this.$router.push({ name: 'Home' })
           } else {
