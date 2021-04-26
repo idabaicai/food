@@ -3,7 +3,7 @@
    <div class="item" v-for="item in orderList" :key="item.id">
      <el-row>
        <el-col :span="3">
-         <img :src="item.img_path" :alt="item.name">
+         <img :src="item.foodImage || defaultImagePath" :alt="item.name">
        </el-col>
        <el-col :span="13">
          <div class="info">
@@ -47,14 +47,17 @@ export default {
           totalPrice: 379,
           desc: '已消费'
         }
-      ]
+      ],
+      defaultImagePath: require('../../../../../assets/order/item2.jpg'),
+      size: 10, // 分页大小
+      page: 1 // 当前页码
     }
   },
   methods: {},
   created () {
-    request.get(`/order/findOrderPageByUserId?userId=${localStorage.getItem('uid')}`)
+    request.get(`/Cart/findList?userId=${localStorage.getItem('uid')}`)
       .then(res => {
-        console.log(res)
+        this.orderList = res.data.data
       })
   }
 }

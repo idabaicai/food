@@ -3,20 +3,20 @@
     <div class="item">
       <el-row v-for="(item, index) in itemList" :key="item.id" type="flex" align="middle">
         <el-col :span="3">
-          <img :src="item.img_path" :alt="item.name">
+          <img :src="item.foodImage || image_path" :alt="item.name">
         </el-col>
-        <el-col :span="5">
+        <!-- <el-col :span="5">
           <div class="title"> {{ item.name }} </div>
           <el-rate v-model="item.star" disabled show-score text-color="#f90"></el-rate>
-        </el-col>
+        </el-col> -->
         <el-col :span="4">
-          ￥{{ item.price }}
+          ￥{{ item.foodPrice }}
         </el-col>
         <el-col :span="6">
-          <calculator :num="item.number" :idx="index" @numChange="handleNumChange"></calculator>
+          <calculator :num="item.num" :idx="index" @numChange="handleNumChange"></calculator>
         </el-col>
         <el-col :span="2">
-           ￥{{ item.number * item.price }}
+           ￥{{ item.num * item.foodPrice }}
         </el-col>
         <el-col :span="2" class="delete">
           <i class="el-icon-delete" @click="handleDelete(index)"></i>
@@ -35,6 +35,7 @@
 </template>
 <script>
 import Calculator from '../../../components/calculator/Calculator'
+import request from '../../../utils/request'
 export default {
   name: 'Collect',
   components: {
@@ -42,16 +43,17 @@ export default {
   },
   data () {
     return {
+      image_path: require('../../../assets/list/item2.jpg'),
       itemList: [
-        { id: 1, name: '孜然鸡柳+百事可乐', star: 4.7, img_path: require('../../../assets/list/item1.jpg'), price: 29, number: 1 },
-        { id: 2, name: '美滋客汉堡', star: 4.8, img_path: require('../../../assets/list/item2.jpg'), price: 39, number: 3 }
+        // { id: 1, name: '孜然鸡柳+百事可乐', star: 4.7, img_path: require('../../../assets/list/item1.jpg'), price: 29, number: 1 },
+        // { id: 2, name: '美滋客汉堡', star: 4.8, img_path: require('../../../assets/list/item2.jpg'), price: 39, number: 3 }
       ]
     }
   },
   methods: {
     // 子组件改变数量
     handleNumChange (num, idx) {
-      this.itemList[idx].number = num
+      this.itemList[idx].num = num
     },
     // 提交订单
     handleSubmit () {
@@ -68,11 +70,19 @@ export default {
       })
     }
   },
+  mounted () {
+    request.get(`/Cart/findList?userId=${localStorage.getItem('uid')}`)
+      .then(res => {
+        this.itemList = res.data.data
+        console.log(res.data.data)
+      })
+    console.log(this.itemList)
+  },
   computed: {
     totalPrice () {
       let total = 0
       this.itemList.forEach(item => {
-        total += item.number * item.price
+        total += item.num * item.foodPrice
       })
       return total
     }
