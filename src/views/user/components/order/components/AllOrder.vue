@@ -23,6 +23,7 @@
   </div>
 </template>
 <script>
+import request from '../../../../../utils/request'
 export default {
   name: 'AllOrder',
   data () {
@@ -48,6 +49,13 @@ export default {
         }
       ]
     }
+  },
+  methods: {},
+  created () {
+    request.get(`/order/findOrderPageByUserId?userId=${localStorage.getItem('uid')}`)
+      .then(res => {
+        console.log(res)
+      })
   }
 }
 </script>
