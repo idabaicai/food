@@ -1,6 +1,6 @@
 <template>
   <div class="calc">
-    <el-input class="input" v-model="number">
+    <el-input class="input" v-model="number" @change="emitChange">
        <el-button slot="prepend" icon="el-icon-minus" @click="handleMinux" :disabled="this.number===1"></el-button>
        <el-button slot="append" icon="el-icon-plus" @click="handlePlus"></el-button>
     </el-input>
@@ -11,7 +11,7 @@ export default {
   name: 'Calculator',
   props: {
     num: { // 数量
-      type: Number,
+      type: [Number, String],
       default () {
         return 1
       }
@@ -35,6 +35,15 @@ export default {
     handlePlus () {
       this.number++
       this.$emit('numChange', this.number, this.idx)
+    },
+    emitChange () {
+      console.log(this.number)
+      if (this.number > 0) {
+        this.$emit('numChange', this.number, this.idx)
+      } else {
+        this.number = 1
+        this.$emit('numChange', this.number, this.idx)
+      }
     }
   },
   created () {
