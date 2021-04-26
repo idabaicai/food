@@ -211,7 +211,6 @@ export default {
           display: flex;
           width: 100%;
           height: 100%;
-          background-color: #0d0;
         }
         .swiper-slide {
           font-size: 5rem;
@@ -234,7 +233,6 @@ export default {
         .item {
           width: 226px;
           height: 127px;
-          background-color: pink;
           &:nth-child(2) {
             margin: 0 6px;
           }
