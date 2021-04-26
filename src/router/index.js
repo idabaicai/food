@@ -38,7 +38,7 @@ const routes = [
     props: true
   },
   {
-    path: '/list/:cateName', // 商品列表
+    path: '/list/:cateId', // 商品列表
     name: 'List',
     component: List,
     props: true

@@ -46,6 +46,7 @@
 </template>
 <script>
 import Price from '../../components/common/Price'
+import request from '../../utils/request'
 export default {
   name: 'GoodItem',
   props: {
@@ -68,7 +69,8 @@ export default {
         price: 199,
         number: 1
       },
-      number: 1 // 数量
+      number: 1, // 数量,
+      uid: ''
     }
   },
   methods: {
@@ -90,8 +92,11 @@ export default {
     },
     // 加入购物车
     handleCart () {
-      console.log('add cart')
+      request.post('/Cart/addCart')
     }
+  },
+  created () {
+    this.uid = localStorage.getItem('uid')
   },
   computed: {
     total () {

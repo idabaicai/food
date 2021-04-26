@@ -3,7 +3,7 @@
     <div class="item" v-for="item in itemList" :key="item.id">
       <el-row>
         <el-col :span="5">
-          <img :src="item.img_path" :alt="item.name" @click="handleDetail(item.id)">
+          <img :src="item.image || img_path" :alt="item.name" @click="handleDetail(item.id)">
         </el-col>
         <el-col :span="19">
             <div class="info-container">
@@ -28,10 +28,11 @@
   </div>
 </template>
 <script>
+import request from '../../../utils/request'
 export default {
   name: 'Item',
   props: {
-    cateName: {
+    cateId: {
       type: String,
       default () {
         return 'all'
@@ -40,36 +41,36 @@ export default {
   },
   data () {
     return {
+      img_path: require('../../../assets/list/item1.jpg'),
       itemList: [
-        {
-          id: 10,
-          name: '蜜雪冰城（昌江店）',
-          img_path: require('../../../assets/list/item1.jpg'),
-          star: 4.8,
-          address: '亚细亚商业广场人民北路汽车站对面农工商公司主楼第一层楼梯间左侧第一间',
-          price: 8
-        },
-        {
-          id: 11,
-          name: '德克士（南国超市店）',
-          img_path: require('../../../assets/list/item2.jpg'),
-          star: 4.6,
-          address: '兴业世纪广场石碌镇人民北路南国超市1楼',
-          price: 28
-        }
+      //   {
+      //     id: 10,
+      //     name: '蜜雪冰城（昌江店）',
+      //     img_path: require('../../../assets/list/item1.jpg'),
+      //     star: 4.8,
+      //     address: '亚细亚商业广场人民北路汽车站对面农工商公司主楼第一层楼梯间左侧第一间',
+      //     price: 8
+      //   },
       ]
     }
   },
   methods: {
     handleDetail (id) {
+      console.log(id)
       this.$router.push({ path: `/detail/${id}` })
     }
+  },
+  created () {
+    request.get(`/goods/findGoodsByItemId?itemId=${this.cateId}`)
+      .then(res => {
+        console.log(res.data.data.data)
+        this.itemList = res.data.data.data
+      })
   }
 }
 </script>
 <style lang="less" scoped>
   .container {
-    height: 800px;
     padding: 20px 15px;
     background-color: #fff;
     border: 1px solid #ddd;

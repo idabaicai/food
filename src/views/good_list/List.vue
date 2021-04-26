@@ -2,7 +2,7 @@
   <div>
     <Header />
     <Nav />
-    <item :cate-name="cateName"></item>
+    <item :cate-id="cateId"></item>
     <Footer />
   </div>
 </template>
@@ -14,7 +14,7 @@ import Item from './components/Item'
 export default {
   name: 'List',
   props: {
-    cateName: {
+    cateId: {
       type: String,
       default () {
         return 'all'
@@ -28,7 +28,6 @@ export default {
     Item
   },
   created () {
-    console.log(this.cateName)
   }
 }
 </script>
