@@ -64,11 +64,6 @@ export default {
     return {
       img_path: require('../../assets/detail/item1.jpg'),
       item: {
-        // id: '1001',
-        // name: '不吃火锅，就吃烤匠！',
-        // desc: '仅售89元！价值100元的代金券，除酒水饮料外全场通用，可叠加使用，可免费使用包间，提供免费WiFi',
-        // price: 199,
-        // number: 1
       },
       number: 1, // 数量,
       uid: ''
@@ -86,18 +81,36 @@ export default {
     // 提交订单
     handleSubmit () {
       if (this.number > 0) {
-        this.$message.success('提交成功！')
+        const params = {
+          order: {
+            payment: 100,
+            userId: this.uid,
+            userName: localStorage.getItem('uname')
+          },
+          orderFood: [
+            {
+              fid: this.item.id,
+              num: this.number,
+              name: this.item.name,
+              price: this.item.price
+            }
+          ]
+        }
+        request.post('/order/saveOrder', params)
+          .then(res => {
+            console.log(res)
+            if (res.data.state === 1) {
+              this.$message.success('提交成功！')
+            } else {
+              this.$message.error(res.data.message || '提交失败')
+            }
+          })
       } else {
         this.$message.error('数量不能小于1哦')
       }
     },
     // 加入购物车
     handleCart () {
-      // {
-      //         "userId": 1,
-      //         "foodId": 10,
-      //         "num": 5
-      // }
       const params = {
         userId: this.uid,
         foodId: this.item.id,

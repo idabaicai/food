@@ -5,10 +5,10 @@
         <el-col :span="3">
           <img :src="item.foodImage || image_path" :alt="item.name">
         </el-col>
-        <!-- <el-col :span="5">
-          <div class="title"> {{ item.name }} </div>
-          <el-rate v-model="item.star" disabled show-score text-color="#f90"></el-rate>
-        </el-col> -->
+        <el-col :span="5">
+          <div class="title"> {{ item.foodTitle }} </div>
+          <!-- <el-rate v-model="item.star" disabled show-score text-color="#f90"></el-rate> -->
+        </el-col>
         <el-col :span="4">
           ￥{{ item.foodPrice }}
         </el-col>
