@@ -131,6 +131,7 @@ export default {
     // 获取详情
     request.get(`/goods/findGoodsDetail?id=${this.id}`)
       .then(res => {
+        console.log(res, 'ress')
         this.item = res.data.data.goods
       })
   },
