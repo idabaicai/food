@@ -2,7 +2,7 @@
   <div>
     <p>快捷键： vue</p>
     <button>这是一个按钮1</button>
-    <div>测试git,dev_lh提交</div>
+    <div>测试git,dev_lh提交1</div>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 export default {
   methods: {
     say () {
-      // console.log("hello");
+      console.log('hello')
     }
   }
 }
