@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>快捷键： vue</p>
-    <button></button>
+    <button>这是一个按钮</button>
   </div>
 </template>
 
