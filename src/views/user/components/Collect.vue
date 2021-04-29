@@ -46,7 +46,6 @@ export default {
       image_path: require('../../../assets/list/item2.jpg'),
       itemList: [
         // { id: 1, name: '孜然鸡柳+百事可乐', star: 4.7, img_path: require('../../../assets/list/item1.jpg'), price: 29, number: 1 },
-        // { id: 2, name: '美滋客汉堡', star: 4.8, img_path: require('../../../assets/list/item2.jpg'), price: 39, number: 3 }
       ],
       uid: null
     }
@@ -58,7 +57,37 @@ export default {
     },
     // 提交订单
     handleSubmit () {
-      console.log('submit')
+      let payment = 0
+      const orderFood = this.itemList.map(item => {
+        payment += item.num * item.foodPrice
+        return {
+          fid: item.foodId,
+          num: item.num,
+          name: item.foodTitle,
+          payment: item.num * item.foodPrice
+        }
+      })
+      const params = {
+        order: {
+          payment, // 总价
+          userId: this.uid,
+          userName: localStorage.getItem('uname')
+        },
+        orderFood, // 订单
+        orderShipping: { // 收获地址
+          receiverName: localStorage.getItem('uname'),
+          receiverMobile: localStorage.getItem('phone'),
+          receiverAddress: localStorage.getItem('address')
+        }
+      }
+      request.post('/order/saveOrder', params)
+        .then(res => {
+          if (res.data.state === 1) {
+            this.$message.success('提交成功！')
+          } else {
+            this.$message.error(res.data.message || '提交失败')
+          }
+        })
     },
     // 删除 item
     handleDelete (idx) {
@@ -77,7 +106,6 @@ export default {
     request.get(`/Cart/findList?userId=${this.uid}`)
       .then(res => {
         this.itemList = res.data.data
-        console.log(res.data.data)
       })
   },
   created () {
