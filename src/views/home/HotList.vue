@@ -13,6 +13,7 @@
 </template>
 <script>
 import GoodCard from '../../components/card/GoodCard'
+import request from '../../utils/request'
 export default {
   name: 'HotList',
   components: {
@@ -20,19 +21,38 @@ export default {
   },
   data () {
     return {
+      // 默认图片
+      image_path: require('../../assets/good/item1.jpg'),
       // 热门推荐
       hotList: [
-        { id: 10, name: '麻婆豆腐（天府五街店）', star: 4.5, price: 26.5, img_path: require('../../assets/good/item1.jpg') },
-        { id: 11, name: '麻婆豆腐（天府五街店）', star: 3.2, price: 26.5, img_path: require('../../assets/good/item1.jpg') },
-        { id: 12, name: '麻婆豆腐（天府五街店）', star: 4.6, price: 26.5, img_path: require('../../assets/good/item1.jpg') },
-        { id: 13, name: '麻婆豆腐', star: 4.5, price: 26.5, img_path: require('../../assets/good/item1.jpg') }
+        // { id: 10, name: '麻婆豆腐（天府五街店）', star: 4.5, price: 26.5, img_path: require('../../assets/good/item1.jpg') },
       ]
     }
   },
   methods: {
     getDetail (id) {
       console.log(id)
+    },
+    getRecommend () {
+      request.get('/goods/findGoodsByItemId?itemId=1')
+        .then(res => {
+          console.log(res.data)
+          this.hotList = []
+          res.data.data.data.forEach((item, index) => {
+            if (index < 4) {
+              this.hotList.push({
+                id: item.id,
+                name: item.name,
+                star: item.star || 4.5,
+                img_path: item.image || this.image_path
+              })
+            }
+          })
+        })
     }
+  },
+  created () {
+    this.getRecommend()
   }
 }
 </script>
