@@ -20,6 +20,13 @@
        </el-col>
      </el-row>
    </div>
+   <div class="pagination">
+        <el-pagination
+          layout="prev, pager, next"
+          @current-change="handlePageChange"
+          :total="50">
+        </el-pagination>
+   </div>
   </div>
 </template>
 <script>
@@ -30,25 +37,32 @@ export default {
     return {
       orderList: [],
       defaultImagePath: require('../../../../../assets/order/item2.jpg'),
-      size: 10, // 分页大小
-      page: 1 // 当前页码
+      params: {
+        total: 1,
+        size: 3, // 分页大小
+        page: 0 // 当前页码
+      }
     }
   },
   methods: {
+    handlePageChange (current) {
+      console.log(current)
+      this.params.page = current
+      this.getOrderList()
+    },
     /**
      * 获取订单
      */
     getOrderList () {
-      request.get(`/order/findOrderPageByUserId?userId=${localStorage.getItem('uid')}&page=${this.page}&sie=${this.size}`)
+      request.get(`/order/findOrderPageByUserId?userId=${localStorage.getItem('uid')}&page=${this.params.page}&size=${this.params.size}`)
         .then(res => {
-          console.log(res.data.data.data, 'data')
           this.orderList = res.data.data.data
+          this.params.total = res.data.data.count
         })
     }
   },
   created () {
     this.getOrderList()
-    console.log(this.orderList)
   }
 }
 </script>
