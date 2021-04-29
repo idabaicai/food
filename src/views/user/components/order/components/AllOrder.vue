@@ -28,8 +28,7 @@ export default {
   name: 'AllOrder',
   data () {
     return {
-      orderList: [
-       ],
+      orderList: [],
       defaultImagePath: require('../../../../../assets/order/item2.jpg'),
       size: 10, // 分页大小
       page: 1 // 当前页码
@@ -41,10 +40,10 @@ export default {
      */
     getOrderList () {
       request.get(`/order/findOrderPageByUserId?userId=${localStorage.getItem('uid')}&page=${this.page}&sie=${this.size}`)
-      .then(res => {
-        console.log(res.data.data.data, 'data')
-        this.orderList = res.data.data.data
-      })
+        .then(res => {
+          console.log(res.data.data.data, 'data')
+          this.orderList = res.data.data.data
+        })
     }
   },
   created () {

@@ -16,13 +16,13 @@ import allOrder from './components/AllOrder' // 全部订单
 export default {
   name: 'Order',
   components: {
-    allOrder,
+    allOrder
   },
   data () {
     return {
       active: 'allOrder',
       tabList: [
-        { id: 1, name: 'allOrder', label: '全部订单' },
+        { id: 1, name: 'allOrder', label: '全部订单' }
       ]
     }
   },

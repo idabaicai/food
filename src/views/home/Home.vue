@@ -21,7 +21,7 @@ export default {
     Nav,
     FoodMain,
     HotList,
-    Footer,
+    Footer
     // YouLike
   }
 }

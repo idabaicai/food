@@ -81,8 +81,6 @@ export default {
     // 提交订单
     handleSubmit () {
       if (this.number > 0) {
-        let payment = '' // 总价
-        console.log(localStorage.getItem('login'), 'login')
         const params = {
           order: {
             payment: this.number * this.item.price, // 总价
@@ -99,9 +97,9 @@ export default {
             }
           ],
           orderShipping: { // 收获地址
-          receiverName: localStorage.getItem('uname'),
-          receiverMobile: localStorage.getItem('phone'),
-          receiverAddress: localStorage.getItem('address')
+            receiverName: localStorage.getItem('uname'),
+            receiverMobile: localStorage.getItem('phone'),
+            receiverAddress: localStorage.getItem('address')
           }
         }
         request.post('/order/saveOrder', params)
