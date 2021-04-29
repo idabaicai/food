@@ -4,7 +4,7 @@
     <Nav />
     <FoodMain />
     <HotList />
-    <YouLike />
+    <!-- <YouLike /> -->
     <Footer />
   </div>
 </template>
@@ -14,7 +14,7 @@ import Nav from '../../components/common/Nav'
 import FoodMain from './FoodMain'
 import HotList from './HotList'
 import Footer from '../../components/common/Footer'
-import YouLike from '../../components/guessYouLike'
+// import YouLike from '../../components/guessYouLike'
 export default {
   components: {
     Header,
@@ -22,7 +22,7 @@ export default {
     FoodMain,
     HotList,
     Footer,
-    YouLike
+    // YouLike
   }
 }
 </script>

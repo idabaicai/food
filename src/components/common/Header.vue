@@ -16,7 +16,6 @@
             <a href="#" @click.prevent="handleUserCenter">我的</a>
             <a href="#" v-if="isLogin" @click.prevent="logout">注销</a>
             <a href="#" v-else @click.prevent="login">登录</a>
-            <a href="#">小程序</a>
             <a href="#">{{site.name}}规则</a>
             <a href="#">订单中心</a>
           </div>

@@ -68,10 +68,10 @@
                   <a class="item info-text">购物车</a>
                 </el-col>
               </div>
-              <el-col :span="8">
+              <!-- <el-col :span="8">
                 <span class="iconfont icon-coupon"></span>
                 <a class="item info-text">优惠券</a>
-              </el-col>
+              </el-col> -->
             </el-row>
           </div>
         </div>

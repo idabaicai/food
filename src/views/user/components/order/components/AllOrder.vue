@@ -29,16 +29,7 @@ export default {
   data () {
     return {
       orderList: [
-        // {
-        //   id: 1,
-        //   name: '巴蜀大将火锅现炸酥肉1份',
-        //   img_path: require('../../../../../assets/order/item1.jpg'),
-        //   orderDate: '2021-04-19 10:39',
-        //   number: 10,
-        //   totalPrice: 376,
-        //   desc: '已关闭'
-        // },
-      ],
+       ],
       defaultImagePath: require('../../../../../assets/order/item2.jpg'),
       size: 10, // 分页大小
       page: 1 // 当前页码
