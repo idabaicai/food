@@ -7,13 +7,13 @@
        </el-col>
        <el-col :span="13">
          <div class="info">
-           <div class="name"> {{ item.name }} </div>
-           <div class="number info-text"> 数量: {{ item.number }} </div>
-           <div class="date info-text"> 下单时间: {{ item.orderDate }} </div>
+           <div class="name"><span class="info-text">订单编号 {{ item.id }}</span>  </div>
+           <!-- <div class="number info-text"> 数量: {{ item.number }} </div> -->
+           <div class="date info-text"> 下单时间: {{ item.paymentTime }} </div>
          </div>
        </el-col>
        <el-col :span="4">
-         <span class="total-price">总价： {{ item.totalPrice }} </span>
+         <span class="total-price">总价： {{ item.payment }} </span>
        </el-col>
        <el-col :span="4">
          {{ item.desc }}
@@ -29,36 +29,36 @@ export default {
   data () {
     return {
       orderList: [
-        {
-          id: 1,
-          name: '巴蜀大将火锅现炸酥肉1份',
-          img_path: require('../../../../../assets/order/item1.jpg'),
-          orderDate: '2021-04-19 10:39',
-          number: 10,
-          totalPrice: 376,
-          desc: '已关闭'
-        },
-        {
-          id: 2,
-          name: '三姐弟石锅饭单人餐',
-          img_path: require('../../../../../assets/order/item2.jpg'),
-          orderDate: '2021-04-19 10:39',
-          number: 18,
-          totalPrice: 379,
-          desc: '已消费'
-        }
+        // {
+        //   id: 1,
+        //   name: '巴蜀大将火锅现炸酥肉1份',
+        //   img_path: require('../../../../../assets/order/item1.jpg'),
+        //   orderDate: '2021-04-19 10:39',
+        //   number: 10,
+        //   totalPrice: 376,
+        //   desc: '已关闭'
+        // },
       ],
       defaultImagePath: require('../../../../../assets/order/item2.jpg'),
       size: 10, // 分页大小
       page: 1 // 当前页码
     }
   },
-  methods: {},
-  created () {
-    request.get(`/Cart/findList?userId=${localStorage.getItem('uid')}`)
+  methods: {
+    /**
+     * 获取订单
+     */
+    getOrderList () {
+      request.get(`/order/findOrderPageByUserId?userId=${localStorage.getItem('uid')}&page=${this.page}&sie=${this.size}`)
       .then(res => {
-        this.orderList = res.data.data
+        console.log(res.data.data.data, 'data')
+        this.orderList = res.data.data.data
       })
+    }
+  },
+  created () {
+    this.getOrderList()
+    console.log(this.orderList)
   }
 }
 </script>

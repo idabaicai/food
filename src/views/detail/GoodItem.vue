@@ -81,20 +81,28 @@ export default {
     // 提交订单
     handleSubmit () {
       if (this.number > 0) {
+        let payment = '' // 总价
+        console.log(localStorage.getItem('login'), 'login')
         const params = {
           order: {
-            payment: 100,
+            payment: this.number * this.item.price, // 总价
             userId: this.uid,
             userName: localStorage.getItem('uname')
           },
-          orderFood: [
+          orderFood: [ // 订单
             {
               fid: this.item.id,
               num: this.number,
               name: this.item.name,
-              price: this.item.price
+              price: this.item.price,
+              image: this.item.iamge
             }
-          ]
+          ],
+          orderShipping: { // 收获地址
+          receiverName: localStorage.getItem('uname'),
+          receiverMobile: localStorage.getItem('phone'),
+          receiverAddress: localStorage.getItem('address')
+          }
         }
         request.post('/order/saveOrder', params)
           .then(res => {
@@ -114,8 +122,9 @@ export default {
       const params = {
         userId: this.uid,
         foodId: this.item.id,
-        num: this.item.num
+        num: this.number
       }
+      console.log(params)
       request.post('/Cart/addCart', params)
         .then(res => {
           if (res.data.state === 1) {

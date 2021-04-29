@@ -127,6 +127,8 @@ export default {
             localStorage.setItem('isLogin', true)
             localStorage.setItem('uid', res.data.data.id)
             localStorage.setItem('uname', res.data.data.name)
+            localStorage.setItem('address', res.data.data.address)
+            localStorage.setItem('phone', res.data.data.phone)
             this.$message.success('登录成功')
             this.$router.push({ name: 'Home' })
           } else {
