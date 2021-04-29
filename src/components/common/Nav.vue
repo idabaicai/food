@@ -57,6 +57,12 @@ export default {
         justify-content: flex-start;
         align-items: center;
         cursor: pointer;
+        padding: 10px;
+        img {
+          width: 90px;
+          height: 90px;
+          border-radius: 45px;
+        }
         h2 {
           vertical-align: middle;
         }
