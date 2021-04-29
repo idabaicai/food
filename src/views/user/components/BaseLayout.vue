@@ -17,6 +17,7 @@
 import Order from './order/Order'
 import Collect from './Collect'
 import Info from './Info'
+import OrderDetail from './order/components/OrderDetail'
 export default {
   name: 'BaseLayout',
   props: {
@@ -27,7 +28,8 @@ export default {
   components: {
     Order,
     Collect,
-    Info
+    Info,
+    OrderDetail
   },
   data () {
     return {

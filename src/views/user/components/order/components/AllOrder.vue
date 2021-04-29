@@ -3,7 +3,7 @@
    <div class="item" v-for="item in orderList" :key="item.id">
      <el-row>
        <el-col :span="3">
-         <img :src="item.foodImage || defaultImagePath" :alt="item.name">
+         <img :src="item.foodImage || defaultImagePath" :alt="item.name" @click="handleDetail(item.id)">
        </el-col>
        <el-col :span="13">
          <div class="info">
@@ -20,6 +20,7 @@
        </el-col>
      </el-row>
    </div>
+   <!-- 分页 -->
    <div class="pagination">
         <el-pagination
           layout="prev, pager, next"
@@ -27,6 +28,14 @@
           :total="50">
         </el-pagination>
    </div>
+   <!-- 抽屉 -->
+   <el-drawer
+      title="我是标题"
+      :visible.sync="drawer"
+      :direction="direction"
+      :before-close="handleClose">
+      <span>我来啦!</span>
+    </el-drawer>
   </div>
 </template>
 <script>
@@ -41,12 +50,24 @@ export default {
         total: 1,
         size: 3, // 分页大小
         page: 0 // 当前页码
-      }
+      },
+      drawer: false, // 抽屉
+      direction: 'rtl'
     }
   },
   methods: {
+    /**
+     * 查看订单详情
+     */
+    handleDetail (id) {
+      this.drawer = true
+      request.get(`/order/findOrderDetail?orderId=${id}`)
+        .then(res => {
+          console.log(res.data.data)
+          this.drawer = true
+        })
+    },
     handlePageChange (current) {
-      console.log(current)
       this.params.page = current
       this.getOrderList()
     },
@@ -59,6 +80,12 @@ export default {
           this.orderList = res.data.data.data
           this.params.total = res.data.data.count
         })
+    },
+    /**
+     * 关闭抽屉
+     */
+    handleClose (done) {
+      done()
     }
   },
   created () {
@@ -78,6 +105,7 @@ export default {
       width: 80px;
       height: 80px;
       border-radius: 3px;
+      cursor: pointer;
     }
     .info {
       .name {
