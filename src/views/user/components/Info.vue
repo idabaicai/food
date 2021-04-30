@@ -59,14 +59,12 @@ export default {
   },
   methods: {
     handleEdit () {
-      console.log('submit')
       const params = {
         id: this.uid,
         ...this.info
       }
       request.post('/user/updateUserById', params)
         .then(res => {
-          console.log(res)
           if (res.data.state === 1) {
             this.$message.success('更新成功')
           } else {
@@ -75,14 +73,12 @@ export default {
         })
     },
     handleTabClick (tab) {
-      console.log(tab.name)
       this.activeName = tab.name
     },
     // 更新密码
     handleChange () {
       request.get(`/user/updatePwd?pwd=${this.info.newPassword}&userId=${this.uid}`)
         .then(res => {
-          console.log(res)
           if (res.data.state === 1) {
             this.$message.success('修改成功')
             this.info.newPassword = ''

@@ -80,6 +80,7 @@ export default {
           receiverAddress: localStorage.getItem('address')
         }
       }
+      console.log(JSON.stringify(params))
       request.post('/order/saveOrder', params)
         .then(res => {
           if (res.data.state === 1) {

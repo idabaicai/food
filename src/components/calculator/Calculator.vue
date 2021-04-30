@@ -37,7 +37,6 @@ export default {
       this.$emit('numChange', this.number, this.idx)
     },
     emitChange () {
-      console.log(this.number)
       if (this.number > 0) {
         this.$emit('numChange', this.number, this.idx)
       } else {

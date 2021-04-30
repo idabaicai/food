@@ -31,12 +31,10 @@ export default {
   },
   methods: {
     getDetail (id) {
-      console.log(id)
     },
     getRecommend () {
       request.get('/goods/findGoodsByItemId?itemId=1')
         .then(res => {
-          console.log(res.data)
           this.hotList = []
           res.data.data.data.forEach((item, index) => {
             if (index < 4) {
@@ -44,6 +42,7 @@ export default {
                 id: item.id,
                 name: item.name,
                 star: item.star || 4.5,
+                price: item.price,
                 img_path: item.image || this.image_path
               })
             }

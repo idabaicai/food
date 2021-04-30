@@ -181,9 +181,10 @@ export default {
       height: 120px;
       padding: 30px 0;
       img {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
         cursor: pointer;
+        border-radius: 45px;
       }
     }
     .main {

@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     handleSearch () {
-      console.log('search')
     },
     handleIndex () { // 去首页
       if (this.$route.name !== 'Home') {

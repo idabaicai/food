@@ -30,11 +30,52 @@
    </div>
    <!-- 抽屉 -->
    <el-drawer
-      title="我是标题"
+      title="订单详情"
       :visible.sync="drawer"
       :direction="direction"
       :before-close="handleClose">
-      <span>我来啦!</span>
+      <div class="wrap">
+        <h4>订单详情</h4>
+        <ul>
+          <li>
+            <div class="title">订单号: </div>
+            <div class="detail"> {{ orderDetail.order.id || '' }} </div>
+          </li>
+          <li>
+            <div class="title">总金额: </div>
+            <div class="detail"> {{ orderDetail.order.payment || '' }}元</div>
+          </li>
+          <!-- <li>
+            <div class="title">创建时间: </div>
+            <div class="detail"> {{ orderDetail.order.created || '' }} </div>
+          </li> -->
+          <li>
+            <div class="title">付款时间: </div>
+            <div class="detail"> {{ orderDetail.order.paymentTime || '' }} </div>
+          </li>
+        </ul>
+        <el-divider></el-divider>
+        <h4>收获人信息</h4>
+        <ul>
+          <li>
+            <div class="title">姓名: </div>
+            <div class="detail"> {{ orderDetail.order.userName || '' }} </div>
+          </li>
+          <li>
+            <div class="title">收获地址: </div>
+            <div class="detail"> {{ orderDetail.orderShipping.receiverAddress || '' }}</div>
+          </li>
+          <li>
+            <div class="title">联系方式: </div>
+            <div class="detail"> {{ orderDetail.orderShipping.receiverMobile || '' }} </div>
+          </li>
+          <li>
+            <div class="title">付款时间: </div>
+            <div class="detail"> {{ orderDetail.order.paymentTime || '' }} </div>
+          </li>
+        </ul>
+        <el-divider></el-divider>
+      </div>
     </el-drawer>
   </div>
 </template>
@@ -52,7 +93,11 @@ export default {
         page: 0 // 当前页码
       },
       drawer: false, // 抽屉
-      direction: 'rtl'
+      direction: 'rtl',
+      orderDetail: { // 订单详情
+        order: {},
+        orderShipping: {}
+      }
     }
   },
   methods: {
@@ -60,10 +105,11 @@ export default {
      * 查看订单详情
      */
     handleDetail (id) {
-      this.drawer = true
       request.get(`/order/findOrderDetail?orderId=${id}`)
         .then(res => {
           this.drawer = true
+          console.table(res.data.data)
+          this.orderDetail = res.data.data
         })
     },
     handlePageChange (current) {
@@ -113,6 +159,17 @@ export default {
       }
       .date, .number {
         font-size: 13px;
+      }
+    }
+    .wrap {
+      padding: 0 20px;
+      li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .title {
+          width: 80px;
+        }
       }
     }
   }

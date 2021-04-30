@@ -53,7 +53,6 @@ export default {
   created () {
     request.get(`/goods/findGoodsByItemId?itemId=${this.cateId}`)
       .then(res => {
-        console.log(res.data.data.data)
         this.itemList = res.data.data.data
       })
   }

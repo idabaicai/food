@@ -29,7 +29,6 @@ export default {
   methods: {
   },
   created () {
-    console.log(this.id)
   }
 }
 </script>

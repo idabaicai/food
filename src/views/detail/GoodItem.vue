@@ -94,7 +94,8 @@ export default {
               num: this.number,
               name: this.item.name,
               price: this.item.price,
-              image: this.item.iamge
+              image: this.item.image,
+              totalFee: this.number * this.item.price
             }
           ],
           orderShipping: { // 收获地址

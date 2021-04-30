@@ -59,7 +59,6 @@ export default {
     handleUserCenter () {
       const id = localStorage.getItem('uid')
       const isLogin = localStorage.getItem('isLogin')
-      console.log(this.$route.name)
       if (isLogin && this.$route.name !== 'User') {
         this.$router.push({ path: `/user/${id}/Order` })
       }
