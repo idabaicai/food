@@ -49,6 +49,7 @@ export default {
     logout () {
       localStorage.removeItem('isLogin')
       localStorage.removeItem('uid')
+      localStorage.clear()
       this.isLogin = false
       // 去首页
       this.$router.push({ path: '/' })
