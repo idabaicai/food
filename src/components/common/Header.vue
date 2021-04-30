@@ -17,7 +17,7 @@
             <a href="#" v-if="isLogin" @click.prevent="logout">注销</a>
             <a href="#" v-else @click.prevent="login">登录</a>
             <a href="#">{{site.name}}规则</a>
-            <a href="#">订单中心</a>
+            <a href="#" @click.prevent="handleOrderCenter">订单中心</a>
           </div>
         </el-col>
       </el-row>
@@ -63,6 +63,10 @@ export default {
       if (isLogin && this.$route.name !== 'User') {
         this.$router.push({ path: `/user/${id}/Order` })
       }
+    },
+    handleOrderCenter () {
+      const id = localStorage.getItem('uid')
+      this.$router.push({ path: `/user/${id}/Order` })
     }
   },
   created () {
