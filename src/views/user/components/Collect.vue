@@ -23,12 +23,17 @@
         </el-col>
       </el-row>
     </div>
-    <div class="deal">
+    <div class="deal" v-if="itemList.length > 0">
       <div class="total">
       <span class="info-text">总金额：</span> <span class="total">￥{{ totalPrice }}</span>
       </div>
       <div class="submit">
         <el-button @click="handleSubmit" type="primary">提交订单</el-button>
+      </div>
+    </div>
+    <div v-else>
+      <div class="info-text">
+        购物车空空如也！！！
       </div>
     </div>
   </div>
@@ -64,6 +69,8 @@ export default {
           fid: item.foodId,
           num: item.num,
           name: item.foodTitle,
+          price: item.foodPrice,
+          image: item.image || '',
           payment: item.num * item.foodPrice
         }
       })
@@ -75,12 +82,11 @@ export default {
         },
         orderFood, // 订单
         orderShipping: { // 收获地址
-          receiverName: localStorage.getItem('uname'),
-          receiverMobile: localStorage.getItem('phone'),
-          receiverAddress: localStorage.getItem('address')
+          receiverName: JSON.parse(localStorage.getItem('login')).name,
+          receiverMobile: JSON.parse(localStorage.getItem('login')).phone,
+          receiverAddress: JSON.parse(localStorage.getItem('login')).address
         }
       }
-      console.log(JSON.stringify(params))
       request.post('/order/saveOrder', params)
         .then(res => {
           if (res.data.state === 1) {
@@ -158,5 +164,10 @@ export default {
           margin-top: 4px;
         }
       }
+    .info-text {
+      display: flex;
+      justify-content: center;
+      margin-top: 80px;
+    }
   }
 </style>
