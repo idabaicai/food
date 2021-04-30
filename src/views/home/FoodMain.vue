@@ -132,7 +132,7 @@ export default {
         }
       })
       if (!swiper) {
-        console.log('swiper init error')
+        console.log('打工人，打工混')
       }
     },
     // 去个人中心
