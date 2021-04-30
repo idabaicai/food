@@ -5,8 +5,8 @@
         <div class="logo" @click="handleIndex">
             <img :src="logo_img" alt="">
         </div>
-        <!-- <el-input
-          placeholder="请输入商家或地点"
+        <el-input
+          placeholder="想吃啥子"
           v-model="query"
         >
           <el-button
@@ -15,13 +15,14 @@
             slot="append"
             @click="handleSearch"
           ></el-button>
-        </el-input> -->
+        </el-input>
       </div>
     </div>
   </div>
 </template>
 <script>
 import site from '../../config/site'
+import request from '../../utils/request';
 export default {
   name: 'Nav', // 顶部导航
   data () {
@@ -33,6 +34,12 @@ export default {
   },
   methods: {
     handleSearch () {
+      const url = `http://114.55.140.167:8091/goods/findGoodsByName?name=${this.query}`
+      request.get(url)
+        .then(res => {
+          console.log(res)
+          this.$router.push({path: `/detail/${res.data.data.data[0].id}`})
+        })
     },
     handleIndex () { // 去首页
       if (this.$route.name !== 'Home') {
