@@ -34,7 +34,7 @@
       :visible.sync="drawer"
       :direction="direction"
       :before-close="handleClose">
-      <div class="wrap">
+      <div class="wrap" v-if="drawer">
         <h4>订单详情</h4>
         <ul>
           <li>
@@ -120,9 +120,8 @@ export default {
       request.get(`/order/findOrderDetail?orderId=${id}`)
         .then(res => {
           this.drawer = true
-          this.orderDetail = res.data.data
           console.log(res.data.data)
-          console.table(res.data.data)
+          this.orderDetail = res.data.data
           console.dir(res.data.data)
         })
     },
