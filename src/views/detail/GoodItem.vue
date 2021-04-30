@@ -43,6 +43,7 @@
         </div>
       </div>
     </div>
+    <i class="el-icon-close" @click="handleClose"></i>
   </div>
 </template>
 <script>
@@ -78,6 +79,12 @@ export default {
     },
     handlePlus () {
       this.number++
+    },
+    /**
+     * 关闭详情
+     */
+    handleClose () {
+      this.$router.push({ path: '/' })
     },
     // 提交订单
     handleSubmit () {
@@ -200,6 +207,9 @@ export default {
           display: flex;
         }
       }
+    }
+    .el-icon-close {
+      cursor: pointer;
     }
   }
 </style>
