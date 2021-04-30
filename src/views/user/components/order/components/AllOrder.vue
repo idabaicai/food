@@ -45,13 +45,24 @@
             <div class="title">总金额: </div>
             <div class="detail"> {{ orderDetail.order.payment || '' }}元</div>
           </li>
-          <!-- <li>
-            <div class="title">创建时间: </div>
-            <div class="detail"> {{ orderDetail.order.created || '' }} </div>
-          </li> -->
           <li>
             <div class="title">付款时间: </div>
             <div class="detail"> {{ orderDetail.order.paymentTime || '' }} </div>
+          </li>
+        </ul>
+        <h4>商品信息</h4>
+        <ul>
+          <li>
+            <div class="title">商品名称: </div>
+            <div class="detail"> {{ orderDetail.orderFood[0].name || '' }} </div>
+          </li>
+          <li>
+            <div class="title">商品数量: </div>
+            <div class="detail"> {{ orderDetail.orderFood[0].num || '' }}</div>
+          </li>
+          <li>
+            <div class="title">商品金额: </div>
+            <div class="detail"> {{ orderDetail.orderFood[0].price || '' }} </div>
           </li>
         </ul>
         <el-divider></el-divider>
@@ -96,6 +107,7 @@ export default {
       direction: 'rtl',
       orderDetail: { // 订单详情
         order: {},
+        orderFood: [], // 商品信息
         orderShipping: {}
       }
     }
@@ -109,6 +121,9 @@ export default {
         .then(res => {
           this.drawer = true
           this.orderDetail = res.data.data
+          console.log(res.data.data)
+          console.table(res.data.data)
+          console.dir(res.data.data)
         })
     },
     handlePageChange (current) {
