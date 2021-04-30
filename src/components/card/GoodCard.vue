@@ -53,6 +53,8 @@ export default {
       display: flex;
       justify-content: center;
       img {
+        width: 267px;
+        height: 150px;
         border-radius: 8px;
       }
     }

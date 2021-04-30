@@ -63,7 +63,6 @@ export default {
       this.drawer = true
       request.get(`/order/findOrderDetail?orderId=${id}`)
         .then(res => {
-          console.log(res.data.data)
           this.drawer = true
         })
     },

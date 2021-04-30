@@ -2,6 +2,7 @@
   <div class="item-container w">
     <div class="left">
       <img :src="item.image || img_path" :alt="item.name">
+      <!-- <img :src="img_path" :alt="item.name"> -->
     </div>
     <div class="right">
       <div class="header">
@@ -97,14 +98,13 @@ export default {
             }
           ],
           orderShipping: { // 收获地址
-            receiverName: localStorage.getItem('uname'),
-            receiverMobile: localStorage.getItem('phone'),
-            receiverAddress: localStorage.getItem('address')
+            receiverName: JSON.parse(localStorage.getItem('login')).name,
+            receiverMobile: JSON.parse(localStorage.getItem('login')).phone,
+            receiverAddress: JSON.parse(localStorage.getItem('login')).address
           }
         }
         request.post('/order/saveOrder', params)
           .then(res => {
-            console.log(res)
             if (res.data.state === 1) {
               this.$message.success('提交成功！')
             } else {
@@ -122,7 +122,6 @@ export default {
         foodId: this.item.id,
         num: this.number
       }
-      console.log(params)
       request.post('/Cart/addCart', params)
         .then(res => {
           if (res.data.state === 1) {
@@ -138,7 +137,6 @@ export default {
     // 获取详情
     request.get(`/goods/findGoodsDetail?id=${this.id}`)
       .then(res => {
-        console.log(res, 'ress')
         this.item = res.data.data.goods
       })
   },
@@ -162,6 +160,10 @@ export default {
     .left {
       float: left;
       width: 430px;
+      img {
+        width: 428px;
+        height: 320px;
+      }
     }
     .right {
       float: left;

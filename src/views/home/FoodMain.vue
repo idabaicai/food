@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        <!-- 耳机轮播 -->
+        <!-- 二级轮播 -->
         <div class="center-bottom">
           <div>
             <el-col
@@ -158,7 +158,6 @@ export default {
     // 获取分类数据
 
     request.post('/item/findItemList').then((res) => {
-      console.log(res)
       this.cateLists = res.data.data
     })
     // 要在next中执行

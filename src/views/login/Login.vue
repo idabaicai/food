@@ -122,13 +122,13 @@ export default {
       // 模拟登录
       request.get(`/user/login?username=${this.user.name}&password=${this.user.password}`)
         .then(res => {
-          console.log(res)
           if (res.data.state === 1) {
             localStorage.setItem('isLogin', true)
             localStorage.setItem('uid', res.data.data.id)
             localStorage.setItem('uname', res.data.data.name)
             localStorage.setItem('address', res.data.data.address)
             localStorage.setItem('phone', res.data.data.phone)
+            localStorage.setItem('login', JSON.stringify(res.data.data))
             this.$message.success('登录成功')
             this.$router.push({ name: 'Home' })
           } else {
@@ -140,7 +140,6 @@ export default {
       this.isLogin = false
     },
     handleRegister () {
-      console.log(this.user)
       request.post('/user/register', this.user)
         .then(res => {
           if (res.data.state === 1) {
