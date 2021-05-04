@@ -84,7 +84,7 @@ export default {
      * 关闭详情
      */
     handleClose () {
-      this.$router.push({ path: '/' })
+      this.$router.go(-1)
     },
     // 提交订单
     handleSubmit () {
