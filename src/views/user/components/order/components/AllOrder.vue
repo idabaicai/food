@@ -120,9 +120,7 @@ export default {
       request.get(`/order/findOrderDetail?orderId=${id}`)
         .then(res => {
           this.drawer = true
-          console.log(res.data.data)
           this.orderDetail = res.data.data
-          console.dir(res.data.data)
         })
     },
     handlePageChange (current) {
