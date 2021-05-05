@@ -91,6 +91,7 @@ export default {
       if (this.number > 0) {
         const params = {
           order: {
+            image: this.item.image,
             payment: this.number * this.item.price, // 总价
             userId: this.uid,
             userName: localStorage.getItem('uname')
