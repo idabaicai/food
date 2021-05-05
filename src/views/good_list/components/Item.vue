@@ -11,8 +11,8 @@
               <h4>{{ item.name }}</h4>
             </div>
             <div class="rate">
-              <el-rate v-model="item.star" disabled></el-rate>
-              <span class="info-text"> {{ item.star }} 分 </span>
+              <el-rate v-model="star" show-score disabled text-color="#ff9900"></el-rate>
+              <!-- <span class="info-text"> {{ item.star }} </span> -->
             </div>
             <div class="address">
               {{ item.address }}
@@ -47,6 +47,7 @@ export default {
   },
   data () {
     return {
+      star: 4.5,
       img_path: require('../../../assets/list/item1.jpg'),
       itemList: [],
       total: 1, // 总条目
