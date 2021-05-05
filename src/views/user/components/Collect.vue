@@ -71,7 +71,7 @@ export default {
           name: item.foodTitle,
           price: item.foodPrice,
           image: item.image || '',
-          payment: item.num * item.foodPrice
+          totalFee: item.num * item.foodPrice
         }
       })
       const params = {
