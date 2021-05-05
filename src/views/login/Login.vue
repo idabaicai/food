@@ -140,6 +140,16 @@ export default {
       this.isLogin = false
     },
     handleRegister () {
+      console.log(this.user)
+      const phoneReg = /^1[3|4|5|6|7|8|9]\d{9}/
+      if(!phoneReg.test(this.user.phone)) {
+        this.$message.error('手机号不合法')
+        return false
+      }
+      if(this.user.password !== this.user.repeatPassword) {
+        this.$message.error('两次密码不一致')
+        return false
+      }
       request.post('/user/register', this.user)
         .then(res => {
           if (res.data.state === 1) {
