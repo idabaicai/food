@@ -3,7 +3,7 @@
    <div class="item" v-for="item in orderList" :key="item.id">
      <el-row>
        <el-col :span="3">
-         <img :src="item.foodImage || defaultImagePath" :alt="item.name" @click="handleDetail(item.id)">
+         <img :src="item.image || defaultImagePath" :alt="item.name" @click="handleDetail(item.id)">
        </el-col>
        <el-col :span="13">
          <div class="info">
@@ -25,7 +25,8 @@
         <el-pagination
           layout="prev, pager, next"
           @current-change="handlePageChange"
-          :total="50">
+          :page-size="3"
+          :total="total">
         </el-pagination>
    </div>
    <!-- 抽屉 -->
@@ -51,20 +52,18 @@
           </li>
         </ul>
         <h4>商品信息</h4>
-        <ul>
-          <li>
-            <div class="title">商品名称: </div>
-            <div class="detail"> {{ orderDetail.orderFood[0].name || '' }} </div>
-          </li>
-          <li>
-            <div class="title">商品数量: </div>
-            <div class="detail"> {{ orderDetail.orderFood[0].num || '' }}</div>
-          </li>
-          <li>
-            <div class="title">商品金额: </div>
-            <div class="detail"> {{ orderDetail.orderFood[0].price || '' }} </div>
-          </li>
-        </ul>
+        <el-table
+          :data="orderDetail.orderFood">
+          <el-table-column label="图片" prop="picPath">
+            <template slot-scope="scope">
+              <img :src="scope.row.image || defaultImagePath" alt="">
+            </template>
+          </el-table-column>
+          <el-table-column label="商品名称" prop="name"></el-table-column>
+          <el-table-column label="金额" prop="price"></el-table-column>
+          <el-table-column label="数量" prop="num"></el-table-column>
+          <el-table-column label="总价" prop="totalFee"></el-table-column>
+        </el-table>
         <el-divider></el-divider>
         <h4>收获人信息</h4>
         <ul>
@@ -103,6 +102,7 @@ export default {
         size: 3, // 分页大小
         page: 0 // 当前页码
       },
+      total: 1, // 总条目数
       drawer: false, // 抽屉
       direction: 'rtl',
       orderDetail: { // 订单详情
@@ -134,7 +134,8 @@ export default {
       request.get(`/order/findOrderPageByUserId?userId=${localStorage.getItem('uid')}&page=${this.params.page}&size=${this.params.size}`)
         .then(res => {
           this.orderList = res.data.data.data
-          this.params.total = res.data.data.count
+          // this.params.total = res.data.data.count
+          this.total = res.data.data.count
         })
     },
     /**

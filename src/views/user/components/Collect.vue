@@ -76,7 +76,7 @@ export default {
       })
       const params = {
         order: {
-          image: itemList[0].foodImage,
+          image: this.itemList[0].foodImage,
           payment, // 总价
           userId: this.uid,
           userName: localStorage.getItem('uname')
