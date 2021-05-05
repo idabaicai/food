@@ -25,6 +25,12 @@
       </el-row>
       <el-divider></el-divider>
     </div>
+    <el-pagination
+        layout="prev, pager, next"
+        :page-size="5"
+        @current-change="handleCurrentChange"
+        :total="total">
+      </el-pagination>
   </div>
 </template>
 <script>
@@ -42,19 +48,33 @@ export default {
   data () {
     return {
       img_path: require('../../../assets/list/item1.jpg'),
-      itemList: []
+      itemList: [],
+      total: 1, // 总条目
+      params: {
+        page: 0,
+        size: 5
+      }
     }
   },
   methods: {
     handleDetail (id) {
       this.$router.push({ path: `/detail/${id}` })
+    },
+    handleCurrentChange (val) {
+      console.log(val)
+      this.params.page = val
+      this.getList()
+    },
+    getList () {
+      request.get(`/goods/findGoodsByItemId?itemId=${this.cateId}&page=${this.params.page}&size=${this.params.size}`)
+      .then(res => {
+        this.itemList = res.data.data.data
+        this.total = res.data.data.count
+      })
     }
   },
   created () {
-    request.get(`/goods/findGoodsByItemId?itemId=${this.cateId}`)
-      .then(res => {
-        this.itemList = res.data.data.data
-      })
+    this.getList()
   }
 }
 </script>
